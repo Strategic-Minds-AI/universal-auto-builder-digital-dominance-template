@@ -43,7 +43,7 @@ test("each generated example is a complete self-contained noindex website",async
 });
 test("studio export features and source are local and explicit",async()=>{
  const js=await readFile(resolve(dist,"assets/studio.js"),"utf8");
- for(const required of ["document.createElement","srcdoc","JSON.stringify","URL.createObjectURL","generator prompt","downloadHtml","downloadJson"])assert.ok(js.includes(required),required);
+ for(const required of ["document.createElement","srcdoc","JSON.stringify","URL.createObjectURL","copyPrompt","downloadHtml","downloadJson"])assert.ok(js.includes(required),required);
  assert.doesNotMatch(js,/fetch\(["']https?:\/\/|localStorage|sessionStorage/);
  const conf=JSON.parse(await readFile(resolve("vercel.json"),"utf8"));
  assert.equal(conf.outputDirectory,"dist/academy");
