@@ -201,7 +201,7 @@ export async function writeIndustryAcademies(manifest,root,renderSite,siteCss){
    await writeFile(join(p,"index.html"),renderSite(x.variant,siteCss),"utf8");
   }
   output.push({id:a.id,name:a.name,path:"/academies/"+a.id+"/",templateIds:[...a.templates],sites:selected.map(x=>x.variant.path),preset:{
-   brand:a.brand,industry:a.industry,headline:a.tagline,subtitle:a.subtitle,cta:a.cta,
+   brand:a.brand,industry:a.industry,category:a.industry,headline:a.tagline,subtitle:a.subtitle,cta:a.cta,
    services:[...a.services],accent:a.accent},synthetic:true,formsConnected:false});
  }
  const hub=join(root,"academies");
