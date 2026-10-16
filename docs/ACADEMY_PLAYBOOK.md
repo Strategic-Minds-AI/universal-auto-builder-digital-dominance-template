@@ -2,7 +2,7 @@
 
 ## What this running website actually does
 
-The Academy is a static, Vercel-compatible educational website built from the authorized Universal Auto Builder layout IDs and Digital Dominance recipe catalog. It generates **20 standalone full-page website demonstrations**, each with accessible navigation, distinct hero styling, service sections, an approach section, FAQ, and a clearly nonfunctional demo inquiry area.
+The Academy is a static, Vercel-compatible educational website built from the authorized Universal Auto Builder layout IDs and Digital Dominance recipe catalog. It generates **40 standalone full-page website demonstrations**, each with accessible navigation, distinct hero styling, service sections, an approach section, FAQ, and a clearly nonfunctional demo inquiry area.
 
 - \`/\` is a searchable gallery of **live HTML page previews** (iframes point to the real generated websites, not borrowed screenshots).
 - \`/sites/<template-id>/\` opens the **entire individual demonstration website**, which stays noindex.
@@ -10,7 +10,7 @@ The Academy is a static, Vercel-compatible educational website built from the au
 - Export **one standalone HTML file** per chosen site or **one JSON configuration file**, with zero generator account dependency. The HTML contains its own CSS and can be opened directly on a computer.
 - Copy an implementation prompt specifying the original exact template ID.
 - \`/learn/\` teaches what templates and generators are, deterministic replication, configuration/SitePacks, quality gates and launch.
-- The 20 imported **Digital Dominance recipes are descriptive metadata**, NOT another 20 finished sites.
+- The 20 **Digital Dominance recipe-derived demonstrations** are static full-page interpretations of 20 descriptive layout recipes, not exact reproductions of advanced video/3D/animation behavior. The underlying recipes also remain available as metadata.
 - Production-ready in this document means an educational website can be deployed on Vercel, NOT that any synthetic customer website has passed release validation or that X1, Supabase, CRM, payments, AI Gateway, or a customer-contact system is connected.
 
 ## Local run
@@ -40,7 +40,7 @@ The repository root contains \`vercel.json\`, with \`buildCommand: npm run build
 6. Add verified facts, accurate business identity and actual product/service data. Validate accessibility, content and contact handling. Create a preview before authorizing a public launch.
 7. Repeat steps 1-6 for another client or industry. Existing exports and repositories remain separate.
 
-The library replicates **its own 20 authorized source designs**, not an arbitrary third-party website URL. No wholesale cloning of external copyright-protected sites is offered.
+The library replicates **its own 20 authorized Auto Builder designs and 20 recipe-derived Digital Dominance concepts**, not an arbitrary third-party website URL. No wholesale cloning of external copyright-protected sites is offered.
 
 ## Examples that you can try now
 
