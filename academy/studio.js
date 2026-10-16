@@ -114,7 +114,7 @@
       if (!response.ok)throw new Error("Gallery manifest could not be loaded.");
       const data=await response.json();
       manifest=data.templates||[];
-      if (manifest.length!==20)throw new Error("Expected the approved 20-template catalog.");
+      if (manifest.length!==40)throw new Error("Expected the approved 40-template catalog.");
       const chosen=new URLSearchParams(location.search).get("template") || manifest[0].id;
       await loadDesign(manifest.some(x=>x.id===chosen)?chosen:manifest[0].id);
     }catch(e){notice("Error: "+e.message);}
