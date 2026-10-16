@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--accent:#66e2c4;--ink:#e8f0f2;--background:#101719;--foreground:#f0f3ed;--muted:#9caaa8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"DM Sans",Arial,sans-serif;background:var(--background);color:var(--ink);line-height:1.5}
+body.theme-light{--background:#f5f4ef;--ink:#172027;--foreground:#131c20;--muted:#606d73;background:var(--background)}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.demo-ribbon{padding:8px 16px;background:var(--accent);color:#091613;text-align:center;font:800 10px/1.4 "Manrope",sans-serif;letter-spacing:.13em}
+.site-header{min-height:90px;max-width:1500px;margin:auto;padding:24px clamp(20px,6vw,90px);display:flex;align-items:center;gap:30px;justify-content:space-between;border-bottom:1px solid rgba(128,150,150,.17)}
+.wordmark{font:800 23px/1 "Manrope",sans-serif;letter-spacing:-.075em;max-width:250px}
+.site-header nav{display:flex;gap:34px;align-items:center;font-size:13px;font-weight:700;opacity:.73}
+.site-header nav a:hover,.site-header nav a:focus-visible{opacity:1;color:var(--accent)}
+.nav-action{border:1px solid rgba(128,150,150,.35);padding:13px 19px;border-radius:50px;font-size:12px;font-weight:800}
+.nav-action span{margin-left:16px;color:var(--accent)}
+.hero{max-width:1600px;margin:auto;display:grid;grid-template-columns:1fr 1fr;min-height:640px;overflow:hidden}
+.hero-content{padding:clamp(70px,8vw,134px) clamp(24px,6vw,95px) 65px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;position:relative}
+.eyebrow,.section-kicker{font:800 11px/1.5 "Manrope",sans-serif;letter-spacing:.19em;text-transform:uppercase}
+.eyebrow{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.signal{width:9px;height:9px;background:var(--accent);border-radius:50%;box-shadow:0 0 20px var(--accent)}
+.hero h1{margin:25px 0 22px;font:800 clamp(50px,5.6vw,102px)/1.05 "Manrope",sans-serif;letter-spacing:-.075em;max-width:760px;text-wrap:balance}
+.hero-description{max-width:550px;margin:0;color:var(--muted);font-size:18px;line-height:1.78}
+.hero-actions{display:flex;gap:27px;align-items:center;flex-wrap:wrap;margin-top:36px}
+.button{display:inline-flex;align-items:center;justify-content:space-between;gap:38px;padding:19px 23px;font-size:13px;font-weight:800;border-radius:4px}
+.button-primary{background:var(--accent);color:#10201d}
+.button-primary:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.text-link{font-size:13px;font-weight:800;border-bottom:1px solid currentColor;padding-bottom:7px}
+.text-link span{padding-left:14px}
+.hero-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:auto;padding-top:56px;font:700 9px "Manrope",sans-serif;color:var(--muted);letter-spacing:.15em}
+.meta-line{width:30px;height:1px;background:var(--accent)}
+.hero-art{min-height:640px;position:relative;background:radial-gradient(ellipse at 60% 32%,color-mix(in srgb,var(--accent),transparent 60%),transparent 44%),linear-gradient(145deg,#171f24,#090e13 80%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.art-grid{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(#b9dcd9 1px,transparent 1px),linear-gradient(90deg,#b9dcd9 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(90deg,transparent,#000)}
+.art-halo{position:absolute;width:60%;aspect-ratio:1;border:1px solid var(--accent);opacity:.13;border-radius:50%;box-shadow:0 0 100px var(--accent)}
+.art-frame{position:relative;width:min(74%,430px);aspect-ratio:1;border:1px solid rgba(255,255,255,.26);border-radius:25px;background:linear-gradient(150deg,rgba(255,255,255,.11),rgba(255,255,255,.015));box-shadow:0 30px 100px rgba(0,0,0,.28);backdrop-filter:blur(8px);overflow:hidden}
+.art-chip{position:absolute;top:25px;left:25px;display:flex;align-items:center;gap:9px;color:white;font:800 9px "Manrope";letter-spacing:.13em}
+.art-chip span{width:8px;height:8px;background:var(--accent);border-radius:50%}
+.art-orbit{position:absolute;aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.19);left:50%;top:50%;transform:translate(-50%,-50%)}
+.art-orbit.one{width:68%;background:linear-gradient(135deg,rgba(255,255,255,.02),transparent)}
+.art-orbit.two{width:44%;background:radial-gradient(circle at 30% 20%,var(--accent),#26333b 68%);border:12px solid rgba(255,255,255,.06);box-shadow:0 15px 50px rgba(0,0,0,.5)}
+.art-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;color:white}
+.art-core b{display:block;font:800 clamp(42px,6vw,80px) "Manrope";letter-spacing:-.09em}
+.art-core small{display:block;white-space:nowrap;font:800 8px "Manrope";letter-spacing:.12em}
+.art-caption{position:absolute;bottom:24px;left:25px;right:25px;display:flex;justify-content:space-between;color:#e1e9e7;font:800 9px "Manrope";letter-spacing:.1em}
+.marquee{padding:23px 7%;display:flex;gap:30px;flex-wrap:wrap;align-items:center;justify-content:space-around;background:var(--accent);color:#14201f;font:800 12px "Manrope";letter-spacing:.14em}
+.marquee i{font:normal 20px "Manrope"}
+.section-intro{max-width:1450px;margin:auto;padding:120px clamp(24px,6vw,95px) 50px}
+.section-kicker{color:color-mix(in srgb,var(--accent),#879d9a 30%);margin-bottom:24px}
+.intro-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
+.intro-grid h2,.approach-copy h2,.faq-section h2,.final-panel h2{font:800 clamp(43px,5vw,80px)/1.09 "Manrope";letter-spacing:-.075em;margin:0}
+.intro-grid h2 em,.faq-section h2 em{font-style:normal;color:var(--accent)}
+.intro-grid p{max-width:490px;margin:0 0 5px auto;color:var(--muted);font-size:17px;line-height:1.8}
+.services{max-width:1450px;margin:0 auto;padding:0 clamp(24px,6vw,95px) 130px;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.service{padding:37px 28px 35px;border:1px solid rgba(125,145,150,.25);min-height:315px;display:flex;flex-direction:column;align-items:flex-start;transition:transform .2s,border-color .2s}
+.service:hover{border-color:var(--accent);transform:translateY(-4px)}
+.service-num{font:800 11px "Manrope";color:var(--accent);letter-spacing:.2em}
+.service h3{font:800 clamp(21px,2vw,30px) "Manrope";letter-spacing:-.055em;margin:45px 0 12px}
+.service p{color:var(--muted);font-size:14px;line-height:1.8;margin:0 0 32px}
+.service a{margin-top:auto;font-size:12px;font-weight:800;color:var(--accent)}
+.service a span{padding-left:10px}
+.approach{display:grid;grid-template-columns:1fr 1fr;background:#172128;color:#eef4f2}
+.approach-image{min-height:600px;background:radial-gradient(circle at 55% 46%,color-mix(in srgb,var(--accent),#0b1520 40%),transparent 46%),linear-gradient(165deg,#30404a,#0b141b);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.approach-image:before,.approach-image:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.18);width:60%;aspect-ratio:1;transform:rotate(35deg)}
+.approach-image:after{width:35%;transform:rotate(50deg)}
+.approach-glyph{font:normal 240px/1 "Manrope";color:#fff;opacity:.8}
+.approach-image>span{position:absolute;left:45px;bottom:32px;font:800 10px "Manrope";letter-spacing:.2em}
+.approach-copy{padding:90px clamp(30px,6vw,100px)}
+.approach-copy h2{margin-bottom:23px}
+.approach-copy>p{color:#b2c0c2;font-size:16px;line-height:1.8}
+.numbered{margin-top:50px;border-top:1px solid #41545b}
+.numbered div{padding:18px 0;display:flex;gap:27px;border-bottom:1px solid #41545b;font-size:15px}
+.numbered b{color:var(--accent);font-size:12px}
+.faq-section{max-width:1450px;margin:auto;padding:120px clamp(24px,6vw,95px);display:grid;grid-template-columns:.85fr 1.15fr;gap:70px}
+.faq-stack{border-top:1px solid rgba(128,150,150,.3)}
+.faq-stack details{border-bottom:1px solid rgba(128,150,150,.3);padding:26px 0}
+.faq-stack summary{font-size:16px;font-weight:800;cursor:pointer}
+.faq-stack details p{color:var(--muted);line-height:1.75}
+.final-panel{background:var(--accent);color:#15221e;padding:110px clamp(24px,9vw,160px)}
+.final-panel .section-kicker{color:#334c43}
+.final-panel h2{font-size:clamp(54px,7vw,108px)}
+.final-panel p{max-width:530px;line-height:1.8;font-size:16px}
+.button-outline{border:1px solid currentColor;margin-top:24px;min-width:190px}
+.site-footer{padding:45px clamp(24px,6vw,95px);display:flex;justify-content:space-between;align-items:center;gap:24px;font:800 10px "Manrope";letter-spacing:.08em}
+.site-footer .wordmark{font-size:19px;letter-spacing:-.06em}
+.site-footer>a{color:var(--accent)}
+.motif-center .hero{grid-template-columns:1fr;min-height:0}
+.motif-center .hero-content{align-items:center;text-align:center;min-height:485px;padding-top:80px;padding-bottom:45px}
+.motif-center .hero h1{max-width:900px}
+.motif-center .hero-art{min-height:370px}
+.motif-center .hero-meta{margin-top:12px;padding-top:20px}
+.motif-center .hero-art .art-frame{max-width:340px}
+.motif-offset .hero{grid-template-columns:1.15fr .85fr}
+.motif-offset .hero-content{padding-top:165px;padding-bottom:120px}
+.motif-offset .hero-art{clip-path:polygon(12% 0,100% 0,100% 100%,0 100%)}
+.motif-edge .hero{grid-template-columns:.8fr 1.2fr}
+.motif-edge .hero-art{order:-1;min-height:730px}
+.motif-edge .hero-art .art-frame{transform:rotate(-8deg)}
+.motif-edge .hero h1{font-family:Georgia,serif;letter-spacing:-.055em}
+.motif-glass .hero-art{background:radial-gradient(circle at 50% 40%,var(--accent),#31314b 45%,#12141b 95%)}
+.motif-glass .art-frame{background:rgba(255,255,255,.17);box-shadow:0 45px 140px rgba(0,0,0,.55);transform:rotate(4deg)}
+.motif-glass .hero h1{font-style:italic;font-weight:600}
+.motif-poster .hero{grid-template-columns:1fr;min-height:750px;position:relative}
+.motif-poster .hero-art{position:absolute;inset:0;min-height:unset;opacity:.64}
+.motif-poster .hero-content{z-index:2;min-height:750px;background:linear-gradient(90deg,var(--background),transparent)}
+.motif-poster .hero h1{font-size:clamp(64px,9vw,142px);max-width:1000px}
+.motif-poster .hero-description{color:var(--ink)}
+.motif-poster .hero-art .art-frame{margin-left:35%}
+.motif-split .hero-art{background:linear-gradient(160deg,#1b2020 5%,var(--accent) 220%)}
+.motif-split .hero-content{border-top:14px solid var(--accent)}
+.motif-split .hero h1{text-transform:uppercase;letter-spacing:-.095em}
+.motif-cascade .hero{grid-template-columns:1.25fr .75fr}
+.motif-cascade .hero-art{margin:35px 35px 35px -40px;min-height:550px;border-radius:14px}
+.motif-cascade .hero h1{font-family:Georgia,serif;font-weight:500;letter-spacing:-.055em}
+.motif-cascade .hero-art .art-frame{transform:rotate(9deg)}
+.motif-minimal .hero{grid-template-columns:1fr 1fr}
+.motif-minimal .hero-art{background:#d9e3dc}
+.motif-minimal .hero-art .art-frame{border-color:#516759;background:rgba(30,55,42,.12)}
+.motif-minimal .hero-art .art-grid{background-image:linear-gradient(#456052 1px,transparent 1px),linear-gradient(90deg,#456052 1px,transparent 1px)}
+.motif-minimal .hero h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-.07em}
+.motif-cards .hero-art{background:linear-gradient(140deg,#151824 10%,#27394f 100%)}
+.motif-cards .hero-art .art-frame{border-radius:8px;transform:perspective(900px) rotateY(-15deg)}
+.motif-cards .service{background:color-mix(in srgb,var(--accent),transparent 92%);border-radius:15px}
+@media(max-width:950px){.hero,.intro-grid,.approach,.faq-section{grid-template-columns:1fr}.hero-content{padding:72px 28px}.hero-art{min-height:440px}.services{grid-template-columns:1fr 1fr}.site-header nav{display:none}.approach-image{min-height:400px}.approach-copy{padding:60px 35px}.motif-edge .hero-art{order:initial}.motif-poster .hero-content{min-height:650px}.motif-cascade .hero-art{margin:0;border-radius:0}}
+@media(max-width:600px){.demo-ribbon{font-size:8px}.site-header{min-height:72px;padding:18px 20px}.nav-action{padding:10px}.wordmark{font-size:20px}.hero h1{font-size:clamp(48px,11vw,65px)}.hero-description{font-size:16px}.hero-art{min-height:370px}.art-frame{width:80%}.marquee{font-size:9px;gap:11px}.marquee i{font-size:13px}.section-intro{padding-top:76px}.intro-grid h2,.approach-copy h2,.faq-section h2{font-size:47px}.services{grid-template-columns:1fr;padding-bottom:80px}.service{min-height:240px}.service h3{margin-top:25px}.faq-section{padding-top:80px;padding-bottom:80px}.final-panel{padding:80px 24px}.site-footer{flex-wrap:wrap}.site-footer>span:nth-child(2){order:3;flex-basis:100%;font-size:8px}.motif-poster .hero-content{min-height:640px}.motif-poster .hero-art .art-frame{margin-left:12%}.motif-edge .hero,.motif-offset .hero,.motif-cascade .hero,.motif-minimal .hero{grid-template-columns:1fr}.motif-offset .hero-art{clip-path:none}.motif-edge .hero-art{min-height:380px}.motif-center .hero-content{min-height:420px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}

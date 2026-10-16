@@ -151,3 +151,23 @@ Business request / evidence
 **Source truth:** Auto Builder: Strategic-Minds-AI/x1-auto-buiilder at 2a2059e; Digital Dominance: XTREME-SYSTEMS/digital-dominance at b65d4cb. Their original branches have not been modified by this template task.
 
 **Release status: DEVELOPMENT ONLY.** No production merge, deployment, domains, secrets, customer communication or paid actions have been authorized or executed.
+
+
+---
+
+## New: Universal Factory Academy and Individual Site Replicator
+
+The educational production-web *application* has been implemented as a new static Vercel build. It provides **40 actual standalone full-page template demonstration websites**, a live visual studio, per-design HTML/JSON exports, a searchable catalog, and five generator lessons.
+
+**Launch locally:** \`npm run build\` then serve \`dist/academy\` over HTTP. **Vercel** reads \`vercel.json\` and builds the same directory.
+
+- Gallery: \`/\`
+- Five educational generator lessons: \`/learn/\`
+- Customize/export an individual chosen site: \`/studio/?template=split-left\`
+- Full-page actual example: \`/sites/split-left/\`
+
+The first 20 new complete demo websites are generated from the 20 authorized Auto Builder layout IDs. The next 20 are static full-page interpretations derived from the Digital Dominance recipe catalog. They use ten responsive style families. Recipe demos do not claim advanced video/3D interaction or exact visual parity with an original site. They do not constitute 20 customer-ready, connected websites.
+
+**Step-by-step examples, boundaries, and copying instructions:** [Academy Playbook](docs/ACADEMY_PLAYBOOK.md).
+
+**Important:** Academy educational hosting and independently exported HTML do not wire customer forms, AI generation, CRM, payments, authentication, or batch provisioning. Generated sites are synthetic and noindex until independently validated. The Studio JSON export is a configuration snapshot, not a validated canonical SitePack.
