@@ -30,13 +30,25 @@ const concepts=[
  ["Platform","One view. More possibilities.","Atlas Grid","Explore platform","A modular concept for a business platform or portal.",["Operations","Reporting","Workspaces"],"#85c5f3"]
 ];
 function makeManifest(){
- return builderLayouts.map((id,i)=>{
+ const builder=builderLayouts.map((id,i)=>{
   const c=concepts[i]||concepts[0];
   return {id,index:i+1,name:human(id),category:c[0],headline:c[1],brand:c[2],
     cta:c[3],subtitle:c[4],services:c[5],accent:c[6],path:"/sites/"+id+"/",
     studio:"/studio/?template="+encodeURIComponent(id),source:"x1/websiteLayouts.js",
-    recipe:digitalDominanceLayouts[i]?.name??null,ready:"demonstration"};
+    recipe:digitalDominanceLayouts[i]?.name??null,ready:"demonstration",origin:"builder-layout"};
  });
+ const recipes=digitalDominanceLayouts.map((recipe,i)=>{
+  const c=concepts[(i+3)%concepts.length];
+  const id="dd-"+String(recipe.id).toLowerCase().replace(/[^a-z0-9-]+/g,"-");
+  return {id,index:i+builder.length+1,name:recipe.name+" Concept",category:c[0],
+    headline:c[1],brand:c[2]+" Concept",cta:c[3],
+    subtitle:"An educational interpretation of the "+recipe.name+" design recipe. "+c[4],
+    services:c[5],accent:c[6],path:"/sites/"+id+"/",
+    studio:"/studio/?template="+encodeURIComponent(id),
+    source:"digital-dominance/templateLayouts.js",recipe:recipe.name,
+    ready:"demonstration",origin:"recipe-interpretation"};
+ });
+ return [...builder,...recipes];
 }
 function renderSite(m,css){
  const motif=["columns","center","offset","edge","glass","poster","split","cascade","minimal","cards"][ (m.index-1)%10];
@@ -91,7 +103,7 @@ function home(manifest){
  const cards=manifest.map(card).join("");
  return academyHead("Universal Builder Academy")+'<body class="academy-body">'+nav("gallery")+
  '<main><section class="academy-hero"><div class="hero-metadata"><span class="live-dot"></span> THE UNIVERSAL SITE FACTORY <span class="hero-metadata-end">ACADEMY / EDITION 01</span></div>'+
- '<div class="hero-columns"><div class="hero-copy"><span class="eyeline">DESIGN. UNDERSTAND. REPLICATE.</span><h1>One great design.<br><em>Infinite directions.</em></h1><p>Explore real, working website templates. Choose the one you love, personalize it in the live studio, and take home your own independent website files.</p><div class="academy-actions"><a class="primary" href="#library">Explore the template library <span>↗</span></a><a class="quiet" href="/learn/">Learn how generators work <span>↗</span></a></div><div class="hero-proof"><span><b>20</b> runnable site concepts</span><span><b>20</b> Digital Dominance recipes</span><span><b>0</b> vendor lock-in to export</span></div></div>'+
+ '<div class="hero-columns"><div class="hero-copy"><span class="eyeline">DESIGN. UNDERSTAND. REPLICATE.</span><h1>One great design.<br><em>Infinite directions.</em></h1><p>Explore real, working website templates. Choose the one you love, personalize it in the live studio, and take home your own independent website files.</p><div class="academy-actions"><a class="primary" href="#library">Explore the template library <span>↗</span></a><a class="quiet" href="/learn/">Learn how generators work <span>↗</span></a></div><div class="hero-proof"><span><b>40</b> runnable site concepts</span><span><b>20</b> Digital Dominance recipes</span><span><b>0</b> vendor lock-in to export</span></div></div>'+
  '<div class="hero-visual"><div class="visual-top"><span>LIVE SYSTEM / WEBSITE REPLICATOR</span><span>● ACTIVE</span></div><div class="visual-art"><div class="visual-disk"></div><div class="visual-window w1"><span>01 / SELECT</span><div class="v-line large"></div><div class="v-line"></div><div class="v-block"></div></div><div class="visual-window w2"><span>02 / CONFIGURE</span><div class="v-line large"></div><div class="v-line"></div><div class="v-grid"><i></i><i></i><i></i></div></div><div class="visual-window w3"><span>03 / EXPORT</span><div class="v-line large"></div><div class="v-line"></div><div class="v-block"></div></div></div><div class="visual-bottom"><span>FROM A SINGLE TEMPLATE TO YOUR OWN SYSTEM</span><span>↗</span></div></div></div></section>'+
  '<section class="workflow-strip" aria-label="How it works"><div><span>01</span><b>Discover</b><small>Pick the site design</small></div><i>↗</i><div><span>02</span><b>Customize</b><small>Make it your own</small></div><i>↗</i><div><span>03</span><b>Export</b><small>Own the HTML + settings</small></div><i>↗</i><div><span>04</span><b>Validate</b><small>Release with evidence</small></div></section>'+
  '<section class="library" id="library"><div class="section-label">THE SOURCE LIBRARY / 01</div><div class="section-heading"><div><h2>Find your next<br><em>starting point.</em></h2><p>Every preview below is an actual HTML website generated from our reusable template system, not a screenshot of an unrelated site.</p></div><div class="library-count">'+manifest.length+'<small>INDIVIDUAL REPLICABLE DESIGNS</small></div></div>'+
