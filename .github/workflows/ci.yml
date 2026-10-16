@@ -26,3 +26,5 @@ jobs:
           grep -q 'Disallow: /' dist/preview/robots.txt
           grep -q 'noindex, nofollow' dist/preview/exampleville-zz-us/index.html
           grep -q '"deployed": false' dist/preview/receipt.json
+      - name: Attest local preview hashes and noindex safeguards
+        run: node src/verify-preview-receipt.mjs dist/preview/receipt.json
