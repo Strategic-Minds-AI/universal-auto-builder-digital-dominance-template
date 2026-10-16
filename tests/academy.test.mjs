@@ -49,3 +49,53 @@ test("studio export features and source are local and explicit",async()=>{
  assert.equal(conf.outputDirectory,"dist/academy");
  assert.equal(conf.buildCommand,"npm run build");
 });
+
+
+test("six independent industry academy routes and 36 complete tailored previews",async()=>{
+ const registry=JSON.parse(await readFile(resolve(dist,"academies/registry.json"),"utf8"));
+ assert.equal(registry.count,6);
+ assert.equal(registry.academies.length,6);
+ assert.equal(new Set(registry.academies.map(a=>a.id)).size,6);
+ const hub=await readFile(resolve(dist,"academies/index.html"),"utf8");
+ assert.match(hub,/Six different worlds/);
+ assert.equal((hub.match(/class="ia-hub-card /g)||[]).length,6);
+ const root=await readFile(resolve(dist,"index.html"),"utf8");
+ assert.match(root,/href="\/academies\/"/);
+ assert.match(root,/six industry academies/);
+ let count=0;
+ for(const a of registry.academies){
+  assert.equal(a.synthetic,true);
+  assert.equal(a.formsConnected,false);
+  assert.equal(a.templateIds.length,6);
+  assert.equal(new Set(a.templateIds).size,6);
+  assert.equal(a.sites.length,6);
+  const landing=await readFile(resolve(dist,"academies",a.id,"index.html"),"utf8");
+  assert.match(landing,/name="robots" content="noindex,follow"/);
+  assert.match(landing,/THE SPECIALIST PLAYBOOK/);
+  assert.match(landing,/ia-preview-grid/);
+  assert.equal((landing.match(/class="ia-preview-card"/g)||[]).length,6);
+  assert.match(landing,new RegExp('academy='+a.id));
+  for (const id of a.templateIds){
+    const html=await readFile(resolve(dist,"academies",a.id,"sites",id,"index.html"),"utf8");
+    assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
+    assert.match(html,/FICTIONAL TEMPLATE DEMO/);
+    assert.match(html,/data-field="brand"/);
+    assert.match(html,/data-field="headline"/);
+    assert.match(html,/id="services"/);
+    assert.ok(html.length>9000,a.id+"/"+id+" full page");
+    count++;
+  }
+ }
+ assert.equal(count,36);
+ const css=await readFile(resolve(dist,"assets/industry-academies.css"),"utf8");
+ assert.match(css,/ia-theme-verdict/);
+ assert.match(css,/@media\(max-width:660px\)/);
+ const studioJs=await readFile(resolve(dist,"assets/studio.js"),"utf8");
+ assert.match(studioJs,/activeAcademy/);
+ assert.match(studioJs,/academies\/registry\.json/);
+ assert.match(studioJs,/activeAcademy\.preset/);
+ const robots=await readFile(resolve(dist,"robots.txt"),"utf8");
+ assert.match(robots,/Disallow: \/academies\/\*\/sites\//);
+ const cfg=JSON.parse(await readFile(resolve("vercel.json"),"utf8"));
+ assert.ok(cfg.headers.some(x=>x.source.includes("/academies/")&&x.headers.some(h=>h.key==="X-Robots-Tag")));
+});
