@@ -1,0 +1,28 @@
+name: Universal Factory QA
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test source integration and preview safeguards
+        run: npm test
+      - name: Generate local noindex preview and gallery
+        run: |
+          npm run validate:demo
+          npm run preview:demo
+          npm run gallery
+      - name: Check artifacts are explicitly not deployed
+        run: |
+          grep -q 'Disallow: /' dist/preview/robots.txt
+          grep -q 'noindex, nofollow' dist/preview/exampleville-zz-us/index.html
+          grep -q '"deployed": false' dist/preview/receipt.json
