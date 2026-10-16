@@ -2,6 +2,7 @@ import {mkdir, readFile, writeFile, copyFile} from "node:fs/promises";
 import {resolve, join, dirname} from "node:path";
 import {fileURLToPath} from "node:url";
 import {builderLayouts, digitalDominanceLayouts} from "./catalog.mjs";
+import {writeIndustryAcademies} from "./industry-academies.mjs";
 
 const srcRoot=resolve(dirname(fileURLToPath(import.meta.url)),"..");
 const dist=resolve(srcRoot,"dist/academy");
@@ -91,10 +92,10 @@ function academyHead(title){
 }
 function nav(active){
  return '<header class="academy-nav"><a class="brand" href="/"><span class="brandmark">S<span>✳</span></span><span>STRATEGIC MINDS<span class="brand-ai"> AI</span><small>UNIVERSAL FACTORY</small></span></a>'+
- '<nav aria-label="Academy navigation"><a '+(active==="gallery"?'aria-current="page" ':'')+'href="/#library">Template library</a><a '+(active==="learn"?'aria-current="page" ':'')+'href="/learn/">Learn generators</a><a '+(active==="studio"?'aria-current="page" ':'')+'href="/studio/">Build in studio</a></nav><a class="nav-cta" href="/studio/">Open Studio <span>↗</span></a></header>';
+ '<nav aria-label="Academy navigation"><a '+(active==="gallery"?'aria-current="page" ':'')+'href="/#library">Template library</a><a href="/academies/">Industry academies</a><a '+(active==="learn"?'aria-current="page" ':'')+'href="/learn/">Learn generators</a><a '+(active==="studio"?'aria-current="page" ':'')+'href="/studio/">Build in studio</a></nav><a class="nav-cta" href="/studio/">Open Studio <span>↗</span></a></header>';
 }
 function foot(){
- return '<footer class="academy-footer"><div><b>STRATEGIC MINDS AI</b><p>Reusable designs. Governed launches. Real ownership.</p></div><div><a href="/#library">Library</a><a href="/learn/">Lessons</a><a href="/studio/">Studio</a><a href="https://github.com/Strategic-Minds-AI/universal-auto-builder-digital-dominance-template" rel="noopener noreferrer">Source ↗</a></div><small>Demonstration content is synthetic. Publication of customer-facing sites requires separate validation.</small></footer>';
+ return '<footer class="academy-footer"><div><b>STRATEGIC MINDS AI</b><p>Reusable designs. Governed launches. Real ownership.</p></div><div><a href="/#library">Library</a><a href="/academies/">Industry academies</a><a href="/learn/">Lessons</a><a href="/studio/">Studio</a><a href="https://github.com/Strategic-Minds-AI/universal-auto-builder-digital-dominance-template" rel="noopener noreferrer">Source ↗</a></div><small>Demonstration content is synthetic. Publication of customer-facing sites requires separate validation.</small></footer>';
 }
 function card(m){
  return '<article class="template-card" data-category="'+esc(m.category.toLowerCase())+'" data-name="'+esc((m.name+" "+m.brand+" "+m.category).toLowerCase())+'"><div class="template-browser"><div class="browser-controls"><span></span><span></span><span></span><em>'+esc(m.brand.toLowerCase().replace(/\W/g,""))+'.demo</em></div><div class="screen-frame"><iframe title="Actual '+esc(m.name)+' website preview" loading="lazy" tabindex="-1" src="'+m.path+'" sandbox="allow-same-origin"></iframe></div><a class="preview-cover" aria-label="Open full-page '+esc(m.name)+' preview" href="'+m.path+'" target="_blank" rel="noopener">View full-page preview ↗</a></div><div class="template-info"><div><small>DESIGN '+String(m.index).padStart(2,"0")+' / '+esc(m.category)+'</small><h3>'+esc(m.name)+'</h3></div><a class="mini-action" href="'+m.studio+'" aria-label="Customize '+esc(m.name)+'">Use design ↗</a></div><p class="template-note">'+esc(m.brand)+' · Full-page, editable demo</p></article>';
@@ -109,6 +110,7 @@ function home(manifest){
  '<section class="library" id="library"><div class="section-label">THE SOURCE LIBRARY / 01</div><div class="section-heading"><div><h2>Find your next<br><em>starting point.</em></h2><p>Every preview below is an actual HTML website generated from our reusable template system, not a screenshot of an unrelated site.</p></div><div class="library-count">'+manifest.length+'<small>INDIVIDUAL REPLICABLE DESIGNS</small></div></div>'+
  '<div class="library-tools"><label class="search-wrap"><span>⌕</span><input id="templateSearch" type="search" placeholder="Search by style, business or category..." autocomplete="off"></label><div class="filter-controls"><button class="filter active" data-filter="all" type="button">All templates</button><button class="filter" data-filter="installation" type="button">Installation</button><button class="filter" data-filter="education" type="button">Education</button><button class="filter" data-filter="equipment" type="button">Equipment</button><button class="filter" data-filter="technology" type="button">Technology</button></div></div>'+
  '<div class="template-grid" id="templateGrid">'+cards+'</div><p class="no-results" id="noResults" hidden>No templates match your search. Clear the filter to explore all designs.</p></section>'+
+ '<section class="academy-editions-promo"><div><span class="section-label">NEW / SIX SPECIALIZED FACTORIES</span><h2>One engine. <em>Six different worlds.</em></h2><p>Epoxy, personal-injury law, real estate, industrial equipment, hands-on education and AI systems. Each edition includes six tailored full-page website examples, specific teaching guides, and individual export in the Studio.</p><a class="primary" href="/academies/">Explore six industry academies ↗</a></div><div class="promo-art" aria-hidden="true"><span>01 / EPOXY</span><span>02 / LEGAL</span><span>03 / PROPERTY</span><span>04 / EQUIPMENT</span><span>05 / TRAINING</span><span>06 / AI SYSTEMS</span></div></section>'+
  '<section class="teacher-section"><div class="teacher-card"><div><span class="section-label">THE GENERATOR PLAYBOOK / 02</span><h2>Learn the machine.<br><em>Keep the magic.</em></h2><p>Step-by-step lessons explain templates, generators, SitePacks, preview deployment, and why approval and QA matter before multiplying websites.</p><a class="primary" href="/learn/">Enter the learning lab ↗</a></div><div class="teacher-diagram"><span>IDEA</span><i>↓</i><span>TEMPLATE + CONFIG</span><i>↓</i><span>RENDER + PREVIEW</span><i>↓</i><span>QA + APPROVAL</span><i>↓</i><strong>YOUR SITE</strong></div></div></section>'+
  '<section class="academy-closing"><span>YOUR NEXT WEBSITE STARTS WITH A CHOICE.</span><h2>Choose the design.<br>Own what comes next.</h2><a class="primary" href="/studio/">Open the Studio ↗</a></section></main>'+foot()+
  '<script src="/assets/academy.js" defer></script></body></html>';
@@ -154,12 +156,13 @@ async function main(){
   await writeFile(join(dir,"index.html"),renderSite(m,css),"utf8");
  }
  for(const d of ["assets","studio","learn"]) await mkdir(join(dist,d),{recursive:true});
- await Promise.all(["academy.css","academy.js","studio.js"].map(x=>copyFile(join(srcRoot,"academy",x),join(dist,"assets",x))));
+ await Promise.all(["academy.css","academy.js","studio.js","industry-academies.css"].map(x=>copyFile(join(srcRoot,"academy",x),join(dist,"assets",x))));
  await writeFile(join(dist,"manifest.json"),JSON.stringify({version:1,source:"Strategic Minds authorized donor templates",previewOnly:true,templates:manifest,recipes:digitalDominanceLayouts},null,2),"utf8");
  await writeFile(join(dist,"index.html"),home(manifest),"utf8");
  await writeFile(join(dist,"studio/index.html"),studio(manifest),"utf8");
  await writeFile(join(dist,"learn/index.html"),learn(),"utf8");
- await writeFile(join(dist,"robots.txt"),"User-agent: *\nAllow: /\nDisallow: /sites/\nDisallow: /studio/\n","utf8");
- console.log("Academy build generated "+manifest.length+" complete noindex preview websites, "+digitalDominanceLayouts.length+" recipes, live studio and lessons in dist/academy");
+ const editions=await writeIndustryAcademies(manifest,dist,renderSite,css);
+ await writeFile(join(dist,"robots.txt"),"User-agent: *\nAllow: /\nDisallow: /sites/\nDisallow: /studio/\nDisallow: /academies/*/sites/\n","utf8");
+ console.log("Academy build generated "+manifest.length+" complete noindex preview websites, "+digitalDominanceLayouts.length+" recipes, live studio and lessons in dist/academy; plus "+editions.academies+" industry academies with "+editions.industryExamples+" tailored website previews");
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});

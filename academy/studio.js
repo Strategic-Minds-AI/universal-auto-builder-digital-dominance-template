@@ -6,6 +6,7 @@
   const frame = $("studioPreview");
   const feedback = $("studioFeedback");
   let manifest = [];
+  let activeAcademy = null;
   let current = null;
   let originalHtml = "";
   let renderedHtml = "";
@@ -31,6 +32,7 @@
       generator: "Strategic Minds AI / Universal Site Factory Academy",
       format: "studio-config-v1",
       template_id: current.id,
+      industry_academy: activeAcademy?.id || null,
       donor: current.source,
       brand: $("brand").value.trim(),
       industry: $("category").value.trim(),
@@ -66,17 +68,20 @@
     current=selected;
     select.value=id;
     const previewLink=$("fullPreview");
-    previewLink.href=selected.path;
-    setFields(selected);
+    const scopedPath=activeAcademy && activeAcademy.templateIds.includes(id)
+      ? "/academies/"+encodeURIComponent(activeAcademy.id)+"/sites/"+encodeURIComponent(id)+"/"
+      : selected.path;
+    previewLink.href=scopedPath;
+    setFields(activeAcademy?{...selected,...activeAcademy.preset}:selected);
     originalHtml="";
     notice("Loading the original working website...");
-    const response=await fetch(selected.path+"index.html",{cache:"no-cache"});
+    const response=await fetch(scopedPath+"index.html",{cache:"no-cache"});
     if (!response.ok) throw new Error("Template could not load (HTTP "+response.status+").");
     const html=await response.text();
     if (!html.includes("data-field=") || !html.includes('name="robots"')) throw new Error("The source template failed structural validation.");
     originalHtml=html;
     render();
-    notice("Ready. Your changes remain in this browser until you export them.");
+    notice(activeAcademy?"Ready with the "+activeAcademy.name+" preset. This example is fictional; export before publishing.":"Ready. Your changes remain in this browser until you export them.");
     const url=new URL(location.href);
     url.searchParams.set("template",id);
     history.replaceState({template:id},"",url.toString());
@@ -95,6 +100,7 @@
       "Using my authorized Universal Auto Builder + Digital Dominance template,",
       "replicate the EXACT selected design (do not redesign).",
       "Template ID: "+data.template_id+".",
+      "Industry academy: "+(data.industry_academy || "Universal master library")+".",
       "Brand: "+data.brand+". Industry: "+data.industry+".",
       "Headline: "+data.headline+". Description: "+data.subtitle+".",
       "CTA label: "+data.cta+".",
@@ -115,7 +121,16 @@
       const data=await response.json();
       manifest=data.templates||[];
       if (manifest.length!==40)throw new Error("Expected the approved 40-template catalog.");
-      const chosen=new URLSearchParams(location.search).get("template") || manifest[0].id;
+      const params=new URLSearchParams(location.search);
+      const academyId=params.get("academy");
+      if(academyId){
+        const registryResponse=await fetch("/academies/registry.json",{cache:"no-cache"});
+        if(!registryResponse.ok) throw new Error("Industry academy registry unavailable.");
+        const registry=await registryResponse.json();
+        activeAcademy=(registry.academies||[]).find(x=>x.id===academyId)||null;
+        if(!activeAcademy)throw new Error("Unknown industry academy preset.");
+      }
+      const chosen=params.get("template") || activeAcademy?.templateIds[0] || manifest[0].id;
       await loadDesign(manifest.some(x=>x.id===chosen)?chosen:manifest[0].id);
     }catch(e){notice("Error: "+e.message);}
   }
@@ -125,9 +140,9 @@
   for (const name of inputs)$(name).addEventListener("input",render);
   $("reset").addEventListener("click",()=>{
     if(!current)return;
-    setFields(current);
+    setFields(activeAcademy?{...current,...activeAcademy.preset}:current);
     render();
-    notice("Restored the original "+current.name+" demonstration.");
+    notice(activeAcademy?"Restored the "+activeAcademy.name+" example preset.":"Restored the original "+current.name+" demonstration.");
   });
   for (const button of document.querySelectorAll("[data-device]"))button.addEventListener("click",()=>{
     for (const item of document.querySelectorAll("[data-device]"))item.classList.toggle("active",item===button);
