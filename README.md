@@ -171,3 +171,29 @@ The first 20 new complete demo websites are generated from the 20 authorized Aut
 **Step-by-step examples, boundaries, and copying instructions:** [Academy Playbook](docs/ACADEMY_PLAYBOOK.md).
 
 **Important:** Academy educational hosting and independently exported HTML do not wire customer forms, AI generation, CRM, payments, authentication, or batch provisioning. Generated sites are synthetic and noindex until independently validated. The Studio JSON export is a configuration snapshot, not a validated canonical SitePack.
+
+
+---
+
+## Six industry-specific Universal Factory Academies
+
+The Universal Factory now includes **six separate educational academy routes** powered by its single Vercel/Node site generator. No duplicated worker, database, repository, or scheduler is required. Each edition contains six **full-page, generated and individually editable** website demonstrations, three specialist lessons, its own visual identity and direct export through the shared Studio.
+
+**Enter the six-edition gallery**: https://universal-factory-academy.vercel.app/academies/
+
+| Academy | Live path | Best starting examples |
+| --- | --- | --- |
+| Epoxy Website Factory | \`/academies/epoxy/\` | split-left, fullscreen-image, bento |
+| Legal Lead Academy | \`/academies/legal/\` | centered, sidebar, stats |
+| Property Intelligence Studio | \`/academies/real-estate/\` | gallery, magazine, asymmetric |
+| Equipment Commerce Lab | \`/academies/equipment/\` | product-focus, carousel, grid-cards |
+| Training Program Builder | \`/academies/training/\` | timeline, booking, centered |
+| AI Systems Launch Studio | \`/academies/ai-systems/\` | dashboard, bento, minimal |
+
+**Counts:** 40 existing master preview websites, plus **36 additional industry-specific website demonstrations**, for 76 preview-page HTML outputs. These include source-authorized layout adaptations and static interpretations of descriptive design recipes, not dozens of connected customer websites.
+
+**How to make a copy:** Enter a specialist Academy → open any full page → click **CUSTOMIZE THIS** → edit live in the shared Studio → **Download website HTML** and configuration JSON. The Studio URL carries \`?academy=<id>&template=<template-id>\` and loads correct preset content without changing another site.
+
+[Read the Six Academy implementation and hands-on examples](docs/SIX_INDUSTRY_ACADEMIES.md).
+
+The six industry pages are educational noindex examples. They do not have real commerce, attorney intake, property feeds, CRM, training enrollment or AI agent integrations. Do not publish fictional facts as an operating business.
