@@ -1,9 +1,9 @@
 {
   "name": "@strategic-minds/universal-auto-builder-digital-dominance",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Reusable, noindex preview-only Universal Auto Builder + Digital Dominance factory",
+  "description": "Universal Auto Builder and Digital Dominance educational website generator with 20 standalone demos and replication studio",
   "engines": {
     "node": ">=20"
   },
@@ -12,7 +12,8 @@
     "validate:demo": "node src/cli.mjs validate examples/fictional-epoxy.sitepack.json",
     "preview:demo": "node src/cli.mjs preview examples/fictional-epoxy.sitepack.json dist/preview",
     "gallery": "node src/cli.mjs gallery dist/gallery",
-    "check": "npm test && npm run validate:demo && npm run preview:demo && npm run gallery"
+    "check": "npm test && npm run validate:demo && npm run preview:demo && npm run gallery && npm run build",
+    "build": "node src/academy.mjs"
   },
   "license": "UNLICENSED"
 }
