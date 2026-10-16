@@ -16,6 +16,10 @@ test("academy builds independently with all source templates",async()=>{
  const page=await readFile(resolve(dist,"index.html"),"utf8");
  assert.match(page,/One great design/);
  assert.equal((page.match(/class="template-card"/g)||[]).length,40);
+ assert.match(page,/data-filter="builder-layout"/);
+ assert.match(page,/data-filter="recipe-interpretation"/);
+ assert.equal((page.match(/data-origin="builder-layout"/g)||[]).length,20);
+ assert.equal((page.match(/data-origin="recipe-interpretation"/g)||[]).length,20);
  assert.match(page,/iframe/);
  const studio=await readFile(resolve(dist,"studio/index.html"),"utf8");
  for(const id of ["designSelect","studioPreview","downloadHtml","downloadJson","copyPrompt","brand","accent"])assert.match(studio,new RegExp('id="'+id+'"'));
@@ -37,6 +41,14 @@ test("each generated example is a complete self-contained noindex website",async
   assert.match(html,/FICTIONAL TEMPLATE DEMO/);
   assert.ok(html.length>9000,"complete HTML for "+m.id);
  }
+ const centered=await readFile(resolve(dist,"sites/centered/index.html"),"utf8");
+ assert.match(centered,/motif-center/);
+ const splitLeft=await readFile(resolve(dist,"sites/split-left/index.html"),"utf8");
+ assert.match(splitLeft,/motif-columns/);
+ const splitRight=await readFile(resolve(dist,"sites/split-right/index.html"),"utf8");
+ assert.match(splitRight,/motif-edge/);
+ const recipe=await readFile(resolve(dist,"sites/dd-hero-centered/index.html"),"utf8");
+ assert.match(recipe,/motif-center/);
  const robots=await readFile(resolve(dist,"robots.txt"),"utf8");
  assert.match(robots,/Disallow: \/sites\//);
  assert.match(robots,/Disallow: \/studio\//);
