@@ -10,7 +10,7 @@
     const query = search.value.trim().toLowerCase();
     let showing = 0;
     for (const card of cards) {
-      const matchingCategory = active === "all" || card.dataset.category === active;
+      const matchingCategory = active === "all" || card.dataset.category === active || card.dataset.origin === active;
       const matchingName = !query || (card.dataset.name || "").includes(query);
       card.hidden = !(matchingCategory && matchingName);
       if (!card.hidden) showing++;
