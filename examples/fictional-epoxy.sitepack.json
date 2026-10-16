@@ -1,0 +1,73 @@
+{
+  "pack_id": "fictional-epoxy-demonstration",
+  "version": "1.0.0",
+  "synthetic": true,
+  "source": {
+    "repository": "Strategic-Minds-AI/x1-auto-buiilder",
+    "commit_sha": "2a2059ec614c326bf429a69f524c133a5a03761f",
+    "template_id": "extracted-siteRenderer"
+  },
+  "brand": {
+    "name": "FICTIONAL EPOXY PREVIEW",
+    "legal_business_name": "NOT A REAL BUSINESS",
+    "contact_phone": "000-000-0000"
+  },
+  "industry": {
+    "slug": "epoxy-flooring-demonstration",
+    "services": [
+      "Decorative flooring example",
+      "Quote workflow example"
+    ]
+  },
+  "design": {
+    "approved_reference": "original-donor-layout-not-approved-client-design",
+    "design_token_version": "donor-v1",
+    "colorTokens": {
+      "primary": "#38bdf8",
+      "accent": "#0ea5e9",
+      "background": "#0b1523"
+    }
+  },
+  "locations": [
+    {
+      "city": "Exampleville",
+      "region": "ZZ",
+      "country": "US",
+      "verified_service_area": true,
+      "unique_value": "Fictional service area and demo-only content for local preview testing; no real work is offered."
+    }
+  ],
+  "provisioning": {
+    "mode": "preview",
+    "approval_required": true,
+    "noindex_until_validated": true
+  },
+  "content": {
+    "hero": {
+      "headline": "Explore an epoxy flooring layout",
+      "subheadline": "This is a fictional template demonstration, not a real contractor.",
+      "primaryCta": "See example services",
+      "secondaryCta": "Explore"
+    },
+    "services": [
+      {
+        "title": "Fictional garage coatings",
+        "description": "Replace with verified coating systems, prep method and warranty terms."
+      },
+      {
+        "title": "Fictional commercial flooring",
+        "description": "Replace with actual photos, service-area proof, pricing scope and an approved estimate tool."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is this a real business?",
+        "answer": "No. This is synthetic example data and a local preview only."
+      }
+    ],
+    "finalCta": {
+      "headline": "Preview only: no lead capture or outreach",
+      "button": ""
+    }
+  }
+}
