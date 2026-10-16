@@ -51,7 +51,22 @@ function makeManifest(){
  return [...builder,...recipes];
 }
 function renderSite(m,css){
- const motif=["columns","center","offset","edge","glass","poster","split","cascade","minimal","cards"][ (m.index-1)%10];
+ const builderMotifs={
+  centered:"center","split-left":"columns","split-right":"edge",
+  "fullscreen-image":"poster","video-bg":"poster",asymmetric:"offset",
+  "product-focus":"cards","grid-cards":"cards",carousel:"cascade",minimal:"minimal",
+  magazine:"cascade",sidebar:"edge",stats:"glass",testimonial:"center",
+  dashboard:"cards","logo-wall":"columns",booking:"split",gallery:"cascade",
+  timeline:"center",bento:"cards"
+ };
+ const recipeMotifs={
+  "hero-centered":"center","split-screen":"split","fullscreen-video":"poster",
+  "kinetic-typography":"poster","collage-grid":"cascade","broken-grid":"offset",
+  "radial-nav":"glass","hidden-drawer":"edge","three-d-hero":"glass"
+ };
+ const motif= m.origin==="builder-layout"
+  ? (builderMotifs[m.id]||"columns")
+  : (recipeMotifs[m.id.replace(/^dd-/,"")]||["columns","center","offset","edge","glass","poster","split","cascade","minimal","cards"][(m.index-1)%10]);
  const dark=[0,2,4,6,8,9].includes((m.index-1)%10);
  const theme=dark?"dark":"light";
  const features=m.services.map((service,i)=>'<article class="service"><span class="service-num">0'+(i+1)+'</span><h3 data-service="'+i+'">'+esc(service)+'</h3><p>Replace this demonstration with your verified services, examples and practical details.</p><a href="#how">Explore the process <span aria-hidden="true">↗</span></a></article>').join("");
@@ -97,7 +112,7 @@ function foot(){
  return '<footer class="academy-footer"><div><b>STRATEGIC MINDS AI</b><p>Reusable designs. Governed launches. Real ownership.</p></div><div><a href="/#library">Library</a><a href="/learn/">Lessons</a><a href="/studio/">Studio</a><a href="https://github.com/Strategic-Minds-AI/universal-auto-builder-digital-dominance-template" rel="noopener noreferrer">Source ↗</a></div><small>Demonstration content is synthetic. Publication of customer-facing sites requires separate validation.</small></footer>';
 }
 function card(m){
- return '<article class="template-card" data-category="'+esc(m.category.toLowerCase())+'" data-name="'+esc((m.name+" "+m.brand+" "+m.category).toLowerCase())+'"><div class="template-browser"><div class="browser-controls"><span></span><span></span><span></span><em>'+esc(m.brand.toLowerCase().replace(/\W/g,""))+'.demo</em></div><div class="screen-frame"><iframe title="Actual '+esc(m.name)+' website preview" loading="lazy" tabindex="-1" src="'+m.path+'" sandbox="allow-same-origin"></iframe></div><a class="preview-cover" aria-label="Open full-page '+esc(m.name)+' preview" href="'+m.path+'" target="_blank" rel="noopener">View full-page preview ↗</a></div><div class="template-info"><div><small>DESIGN '+String(m.index).padStart(2,"0")+' / '+esc(m.category)+'</small><h3>'+esc(m.name)+'</h3></div><a class="mini-action" href="'+m.studio+'" aria-label="Customize '+esc(m.name)+'">Use design ↗</a></div><p class="template-note">'+esc(m.brand)+' · Full-page, editable demo</p></article>';
+ return '<article class="template-card" data-category="'+esc(m.category.toLowerCase())+'" data-origin="'+esc(m.origin)+'" data-name="'+esc((m.name+" "+m.brand+" "+m.category).toLowerCase())+'"><div class="template-browser"><div class="browser-controls"><span></span><span></span><span></span><em>'+esc(m.brand.toLowerCase().replace(/\W/g,""))+'.demo</em></div><div class="screen-frame"><iframe title="Actual '+esc(m.name)+' website preview" loading="lazy" tabindex="-1" src="'+m.path+'" sandbox="allow-same-origin"></iframe></div><a class="preview-cover" aria-label="Open full-page '+esc(m.name)+' preview" href="'+m.path+'" target="_blank" rel="noopener">View full-page preview ↗</a></div><div class="template-info"><div><small>DESIGN '+String(m.index).padStart(2,"0")+' / '+esc(m.origin==="builder-layout"?"AUTO BUILDER":"DIGITAL DOMINANCE")+'</small><h3>'+esc(m.name)+'</h3></div><a class="mini-action" href="'+m.studio+'" aria-label="Customize '+esc(m.name)+'">Use design ↗</a></div><p class="template-note">'+esc(m.brand)+' · Full-page, editable demo</p></article>';
 }
 function home(manifest){
  const cards=manifest.map(card).join("");
@@ -107,7 +122,7 @@ function home(manifest){
  '<div class="hero-visual"><div class="visual-top"><span>LIVE SYSTEM / WEBSITE REPLICATOR</span><span>● ACTIVE</span></div><div class="visual-art"><div class="visual-disk"></div><div class="visual-window w1"><span>01 / SELECT</span><div class="v-line large"></div><div class="v-line"></div><div class="v-block"></div></div><div class="visual-window w2"><span>02 / CONFIGURE</span><div class="v-line large"></div><div class="v-line"></div><div class="v-grid"><i></i><i></i><i></i></div></div><div class="visual-window w3"><span>03 / EXPORT</span><div class="v-line large"></div><div class="v-line"></div><div class="v-block"></div></div></div><div class="visual-bottom"><span>FROM A SINGLE TEMPLATE TO YOUR OWN SYSTEM</span><span>↗</span></div></div></div></section>'+
  '<section class="workflow-strip" aria-label="How it works"><div><span>01</span><b>Discover</b><small>Pick the site design</small></div><i>↗</i><div><span>02</span><b>Customize</b><small>Make it your own</small></div><i>↗</i><div><span>03</span><b>Export</b><small>Own the HTML + settings</small></div><i>↗</i><div><span>04</span><b>Validate</b><small>Release with evidence</small></div></section>'+
  '<section class="library" id="library"><div class="section-label">THE SOURCE LIBRARY / 01</div><div class="section-heading"><div><h2>Find your next<br><em>starting point.</em></h2><p>Every preview below is an actual HTML website generated from our reusable template system, not a screenshot of an unrelated site.</p></div><div class="library-count">'+manifest.length+'<small>INDIVIDUAL REPLICABLE DESIGNS</small></div></div>'+
- '<div class="library-tools"><label class="search-wrap"><span>⌕</span><input id="templateSearch" type="search" placeholder="Search by style, business or category..." autocomplete="off"></label><div class="filter-controls"><button class="filter active" data-filter="all" type="button">All templates</button><button class="filter" data-filter="installation" type="button">Installation</button><button class="filter" data-filter="education" type="button">Education</button><button class="filter" data-filter="equipment" type="button">Equipment</button><button class="filter" data-filter="technology" type="button">Technology</button></div></div>'+
+ '<div class="library-tools"><label class="search-wrap"><span>⌕</span><input id="templateSearch" type="search" placeholder="Search by style, business or category..." autocomplete="off"></label><div class="filter-controls"><button class="filter active" data-filter="all" type="button">All 40</button><button class="filter" data-filter="builder-layout" type="button">Auto Builder 20</button><button class="filter" data-filter="recipe-interpretation" type="button">Digital Dominance 20</button><button class="filter" data-filter="installation" type="button">Installation</button><button class="filter" data-filter="education" type="button">Education</button><button class="filter" data-filter="equipment" type="button">Equipment</button></div></div>'+
  '<div class="template-grid" id="templateGrid">'+cards+'</div><p class="no-results" id="noResults" hidden>No templates match your search. Clear the filter to explore all designs.</p></section>'+
  '<section class="teacher-section"><div class="teacher-card"><div><span class="section-label">THE GENERATOR PLAYBOOK / 02</span><h2>Learn the machine.<br><em>Keep the magic.</em></h2><p>Step-by-step lessons explain templates, generators, SitePacks, preview deployment, and why approval and QA matter before multiplying websites.</p><a class="primary" href="/learn/">Enter the learning lab ↗</a></div><div class="teacher-diagram"><span>IDEA</span><i>↓</i><span>TEMPLATE + CONFIG</span><i>↓</i><span>RENDER + PREVIEW</span><i>↓</i><span>QA + APPROVAL</span><i>↓</i><strong>YOUR SITE</strong></div></div></section>'+
  '<section class="academy-closing"><span>YOUR NEXT WEBSITE STARTS WITH A CHOICE.</span><h2>Choose the design.<br>Own what comes next.</h2><a class="primary" href="/studio/">Open the Studio ↗</a></section></main>'+foot()+
