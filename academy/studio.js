@@ -163,7 +163,7 @@
       const host = url.hostname;
       const trusted = host === "website-launch-engine.vercel.app" ||
         host === "website-launch-engine-strategic-minds-advisory.vercel.app" ||
-        /^website-launch-engine-[a-z0-9]+-strategic-minds-advisory\.vercel\.app$/.test(host);
+        /^website-launch-engine-[a-z0-9-]+-strategic-minds-advisory\.vercel\.app$/.test(host);
       return trusted ? url.origin : null;
     } catch { return null; }
   })();
