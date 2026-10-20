@@ -153,6 +153,46 @@
     download(escapeFilename($("brand").value)+"-"+current.id+".html",renderedHtml,"text/html;charset=utf-8");
     notice("Website HTML downloaded. Open the file locally to preview the standalone site.");
   });
+  // X1 authenticated parent handoff; never sends tokens, passwords, or data to arbitrary origins.
+  const x1Origin = (() => {
+    const raw = new URLSearchParams(location.search).get("x1_origin");
+    if (!raw) return null;
+    try {
+      const url = new URL(raw);
+      if(url.protocol !== "https:" || url.pathname !== "/" || url.search || url.hash) return null;
+      const host = url.hostname;
+      const trusted = host === "website-launch-engine.vercel.app" ||
+        host === "website-launch-engine-strategic-minds-advisory.vercel.app" ||
+        /^website-launch-engine-[a-z0-9]+-strategic-minds-advisory\.vercel\.app$/.test(host);
+      return trusted ? url.origin : null;
+    } catch { return null; }
+  })();
+  if(x1Origin && window.parent !== window) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.id = "x1SaveProject";
+    button.textContent = "Save to X1 Client Project";
+    button.className = "primary";
+    const target = $("downloadJson");
+    target.parentElement.appendChild(button);
+    button.addEventListener("click", () => {
+      const data = config();
+      if(!data) return notice("Load a design before saving to X1.");
+      window.parent.postMessage({
+        type:"X1_ACADEMY_SAVE_V1",
+        config:data,
+        nonce:new URLSearchParams(location.search).get("x1_nonce")
+      }, x1Origin);
+      notice("Sending design to your X1 authenticated workspace…");
+    });
+    window.addEventListener("message", event => {
+      if(event.origin !== x1Origin || event.source !== window.parent) return;
+      if(event.data?.type === "X1_ACADEMY_SAVE_RESULT_V1") {
+        notice(event.data.ok ? "Design saved to your X1 client projects." :
+          "X1 save unavailable: " + String(event.data.error || "Sign in from X1 Client Portal.").slice(0,140));
+      }
+    });
+  }
   $("downloadJson").addEventListener("click",()=>{
     const data=config();
     if(!data){notice("Load a design before exporting.");return;}
