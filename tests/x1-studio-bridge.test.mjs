@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {spawnSync} from 'node:child_process';
+test('Studio X1 bridge is executable and target-origin restricted',()=>{const s=fs.readFileSync('academy/studio.js','utf8');const p=spawnSync(process.execPath,['--check','academy/studio.js'],{encoding:'utf8'});assert.equal(p.status,0,p.stderr);assert.match(s,/X1_ACADEMY_SAVE_V1/);assert.match(s,/x1_origin/);assert.match(s,/x1_nonce/);assert.match(s,/window\.parent\.postMessage/);assert.match(s,/event\.origin !== x1Origin/);assert.ok(!s.includes('SUPABASE_SERVICE_ROLE_KEY'));});
+
+test('branch preview hosts remain constrained to owned team suffix',()=>{const js=fs.readFileSync('academy/studio.js','utf8');assert.match(js,/website-launch-engine-\[a-z0-9-\]\+/);assert.match(js,/strategic-minds-advisory/);});
